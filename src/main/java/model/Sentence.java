@@ -25,7 +25,6 @@ public class Sentence {
             throw new IllegalArgumentException("You pass null word!");
 
         word.setId(words.size() + 1);
-        word.setParent(this);
         words.add(word);
     }
 

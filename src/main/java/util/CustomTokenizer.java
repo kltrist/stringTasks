@@ -15,7 +15,7 @@ public class CustomTokenizer {
         Text text = new Text();
 
         //sentences
-        for (String strSentence : doc.split("[.?!]")) {
+        for (String strSentence : doc.split("[.?!;]")) {
             Sentence sentence = new Sentence();
 
             //words in sentence

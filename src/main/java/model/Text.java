@@ -15,6 +15,11 @@ public class Text {
         this.sentences = sentences;
     }
 
+    public Text(Sentence sentence) {
+        this.sentences = new ArrayList<>();
+        sentences.add(sentence);
+    }
+
     public void addSentence(Sentence sentence) {
         if (sentence == null)
             throw new IllegalArgumentException("You pass null sentence!");
@@ -33,11 +38,12 @@ public class Text {
         return sentences;
     }
 
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sentences.forEach(sb::append);
         return sb.toString();
     }
+
+
 }

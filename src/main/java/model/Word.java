@@ -10,8 +10,6 @@ public class Word {
 
     private String charSequence;
 
-    private Sentence parent;
-
     public Word(String charSequence) {
         this.charSequence = charSequence.toLowerCase();
     }
@@ -20,13 +18,6 @@ public class Word {
         return id;
     }
 
-    public Sentence getParent() {
-        return parent;
-    }
-
-    public void setParent(Sentence parent) {
-        this.parent = parent;
-    }
 
     public void setId(long id) {
         this.id = id;
