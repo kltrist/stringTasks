@@ -1,5 +1,6 @@
 
 import impl.Task10;
+import impl.Task11;
 import impl.Task16;
 import impl.Task2;
 import impl.Task3;
@@ -174,6 +175,14 @@ public class TaskImplTest {
         for(int i = 0; i < listByFrequency.size() - 1; i++) {
             Assert.assertTrue(listByFrequency.get(i).getValue() >= listByFrequency.get(i + 1).getValue());
         }
+    }
+
+    @Test
+    public void removeLongestWordInSentenceByLetters() {
+        Task11 taskImpl = new Task11();
+        Text sourceText = getExampleText();
+        Text processedText = taskImpl.removeLongestWordInSentenceByLetters(getExampleText(), 'j', 'a');
+        Assert.assertTrue(sourceText.getSentences().get(0).getWords().size() > processedText.getSentences().get(0).getWords().size());
     }
 
     //task 16
