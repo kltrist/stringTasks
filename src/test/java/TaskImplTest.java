@@ -1,3 +1,4 @@
+import impl.Task10;
 import impl.Task2;
 import impl.Task3;
 import impl.Task5;
@@ -16,6 +17,7 @@ import util.CustomTokenizer;
 import util.Printer;
 
 import java.util.List;
+import java.util.Map;
 
 public class TaskImplTest {
 
@@ -157,6 +159,15 @@ public class TaskImplTest {
         }
     }
 
+    //task 10
+    @Test
+    public void getWordsListByFrequency() {
+        Task10 taskImpl = new Task10();
+        List<Map.Entry<Word, Integer>> listByFrequency = taskImpl.getWordsListByFrequency(getExampleText());
+        listByFrequency.forEach(entry -> {
+
+        });
+    }
 
 
 
