@@ -1,6 +1,9 @@
 
+import impl.Task1;
 import impl.Task10;
 import impl.Task11;
+import impl.Task15;
+import impl.Task15;
 import impl.Task16;
 import impl.Task2;
 import impl.Task3;
@@ -53,6 +56,17 @@ public class TaskImplTest {
         sentence.addWord(new Word("разработка"));//  4/10=0.4
         return sentence;
     }
+
+    //task 1
+    @Test
+    public void getSentencesWithSameWords() {
+        Task1 task1 = new Task1();
+        Text text = CustomTokenizer.tokenize("В этой строке строке повторяются слова. А в этой нет. Java is the best!!");
+        List<Sentence> sentenceList = task1.getSentencesWithSameWords(text);
+        Assert.assertEquals(sentenceList.size(),1);
+        Assert.assertTrue(sentenceList.get(0).getWords().contains(new Word("строке")));
+    }
+
 
     //task 2
     @Test
@@ -172,7 +186,7 @@ public class TaskImplTest {
     public void getWordsListByFrequency() {
         Task10 taskImpl = new Task10();
         List<Map.Entry<Word, Integer>> listByFrequency = taskImpl.getWordsListByFrequency(getExampleText());
-        for(int i = 0; i < listByFrequency.size() - 1; i++) {
+        for (int i = 0; i < listByFrequency.size() - 1; i++) {
             Assert.assertTrue(listByFrequency.get(i).getValue() >= listByFrequency.get(i + 1).getValue());
         }
     }
@@ -183,6 +197,19 @@ public class TaskImplTest {
         Text sourceText = getExampleText();
         Text processedText = taskImpl.removeLongestWordInSentenceByLetters(getExampleText(), 'j', 'a');
         Assert.assertTrue(sourceText.getSentences().get(0).getWords().size() > processedText.getSentences().get(0).getWords().size());
+    }
+
+    //task 15
+    @Test
+    public void removeAllOccurrencesOfFirstLetter() {
+        Task15 taskImpl = new Task15();
+        Text newText = taskImpl.removeAllOccurrencesOfFirstLetter(getExampleText());
+
+        for (Word word : newText.getAllWords()) {
+            String firstLetter = String.valueOf(word.getCharSequence().charAt(0));
+            Assert.assertFalse(word.getCharSequence().substring(1).contains(firstLetter));
+        }
+
     }
 
     //task 16
