@@ -177,6 +177,7 @@ public class TaskImplTest {
         }
     }
 
+    //task 11
     @Test
     public void removeLongestWordInSentenceByLetters() {
         Task11 taskImpl = new Task11();
