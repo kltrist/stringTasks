@@ -164,9 +164,9 @@ public class TaskImplTest {
     public void getWordsListByFrequency() {
         Task10 taskImpl = new Task10();
         List<Map.Entry<Word, Integer>> listByFrequency = taskImpl.getWordsListByFrequency(getExampleText());
-        listByFrequency.forEach(entry -> {
-
-        });
+        for(int i = 0; i < listByFrequency.size() - 1; i++) {
+            Assert.assertTrue(listByFrequency.get(i).getValue() >= listByFrequency.get(i + 1).getValue());
+        }
     }
 
 
