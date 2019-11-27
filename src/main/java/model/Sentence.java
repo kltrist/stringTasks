@@ -28,6 +28,10 @@ public class Sentence {
         words.add(word);
     }
 
+    public  void  removeWord(Word word) {
+        words.remove(word);
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -38,6 +42,10 @@ public class Sentence {
 
     public List<Word> getWords() {
         return words;
+    }
+
+    public void setWords(List<Word> words) {
+        this.words = words;
     }
 
     @Override
