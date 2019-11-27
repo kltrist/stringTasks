@@ -1,5 +1,6 @@
+
 import impl.Task10;
-import impl.Task11;
+import impl.Task16;
 import impl.Task2;
 import impl.Task3;
 import impl.Task5;
@@ -19,6 +20,7 @@ import util.Printer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TaskImplTest {
 
@@ -41,6 +43,15 @@ public class TaskImplTest {
         return CustomTokenizer.tokenize(stringDoc);
     }
 
+    private static Sentence getExampleSentence() {
+        Sentence sentence = new Sentence();
+        sentence.addWord(new Word("компания"));  //  4/8=0.5
+        sentence.addWord(new Word("микросхема"));//  4/10=0.4
+        sentence.addWord(new Word("идея"));      //  3/4=0.75
+        sentence.addWord(new Word("совет"));     //  2/5=0.4
+        sentence.addWord(new Word("разработка"));//  4/10=0.4
+        return sentence;
+    }
 
     //task 2
     @Test
@@ -111,13 +122,8 @@ public class TaskImplTest {
     @Test
     public void getWordsSortByVowelsFractionAsc() {
         Task7 taskImpl = new Task7();
-        Sentence sentence = new Sentence();
-        sentence.addWord(new Word("компания"));  //  4/8=0.5
-        sentence.addWord(new Word("микросхема"));//  4/10=0.4
-        sentence.addWord(new Word("идея"));      //  3/4=0.75
-        sentence.addWord(new Word("совет"));     //  2/5=0.4
-        sentence.addWord(new Word("разработка"));//  4/10=0.4
-        Text text = new Text(sentence);
+
+        Text text = new Text(getExampleSentence());
 
         List<Word> words = taskImpl.getWordsSortByVowelsFractionAsc(text);
 
@@ -149,14 +155,14 @@ public class TaskImplTest {
 
         char definedLetter = 'о';
         List<Word> words = taskImpl.getWordsSortByLetterCountAsc(getExampleText(), definedLetter);
-        for (int i = 0; i < words.size()-1; i++) {
+        for (int i = 0; i < words.size() - 1; i++) {
             int currentWordLetterCount = ByLetterMeetingsComparator
                     .matchesCount(words.get(i).getCharSequence(), definedLetter);
 
             int nextWordLetterCount = ByLetterMeetingsComparator
                     .matchesCount(words.get(i + 1).getCharSequence(), definedLetter);
 
-                    Assert.assertTrue(currentWordLetterCount<=nextWordLetterCount);
+            Assert.assertTrue(currentWordLetterCount <= nextWordLetterCount);
         }
     }
 
@@ -170,20 +176,29 @@ public class TaskImplTest {
         }
     }
 
-    //task 11
+    //task 16
     @Test
-    public void removeLongestWordInSentenceByLetters() {
-        Task11 taskImpl = new Task11();
-        Text sourceText = getExampleText();
-        Text processedText = taskImpl.removeLongestWordInSentenceByLetters(getExampleText(), 'и', 'я');
-        System.out.println(processedText);
-        Assert.assertTrue(
-                sourceText.getSentences().get(0).getWords().size() > processedText.getSentences().get(0).getWords().size()
-        );
+    public void replaceWordsWithLength() {
+        Task16 taskImpl = new Task16();
+        Sentence exampleSentence = getExampleSentence();
+
+        int wordLength = 5;
+        Word wordForReplace = new Word("REPLACED");
+
+        List<Word> wordsToBeReplaced = exampleSentence.getWords().stream()
+                .filter(word -> word.getCharSequence().length() == wordLength)
+                .collect(Collectors.toList());
+
+        Sentence sentence = taskImpl.replaceWordsWithLength(exampleSentence, wordLength, wordForReplace);
+        String strSentence = sentence.toString();
+        Assert.assertTrue(strSentence.contains(wordForReplace.getCharSequence()));
+
+        for (Word replacedWord : wordsToBeReplaced) {
+            Assert.assertEquals(replacedWord.getCharSequence(), wordForReplace.getCharSequence());
+        }
+
+
     }
-
-
-
 
 
 }
