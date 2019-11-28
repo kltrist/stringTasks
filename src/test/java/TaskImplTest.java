@@ -2,7 +2,9 @@
 import impl.Task1;
 import impl.Task10;
 import impl.Task11;
-import impl.Task15;
+import impl.Task12;
+import impl.Task13;
+import impl.Task14;
 import impl.Task15;
 import impl.Task16;
 import impl.Task2;
@@ -17,6 +19,7 @@ import impl.comparator.FirstConsonantComparator;
 import model.Sentence;
 import model.Text;
 import model.Word;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import util.CustomTokenizer;
@@ -63,7 +66,7 @@ public class TaskImplTest {
         Task1 task1 = new Task1();
         Text text = CustomTokenizer.tokenize("В этой строке строке повторяются слова. А в этой нет. Java is the best!!");
         List<Sentence> sentenceList = task1.getSentencesWithSameWords(text);
-        Assert.assertEquals(sentenceList.size(),1);
+        Assert.assertEquals(sentenceList.size(), 1);
         Assert.assertTrue(sentenceList.get(0).getWords().contains(new Word("строке")));
     }
 
@@ -199,6 +202,48 @@ public class TaskImplTest {
         Text processedText = taskImpl.removeLongestWordInSentenceByLetters(getExampleText(), 'j', 'a');
         Assert.assertTrue(sourceText.getSentences().get(0).getWords().size() > processedText.getSentences().get(0).getWords().size());
     }
+
+    //task 12
+    @Test
+    public void removeWordsStartsWithConsonantWithLength() {
+        Task12 taskImpl = new Task12();
+        int length = 5;
+        Text newText = taskImpl.removeWordsStartsWithConsonantWithLength(getExampleText(), length);
+        newText.getAllWords().stream()
+                .filter(word -> word.getCharSequence().length() == length)
+                .forEach(word -> Assert.assertTrue(Task12.isVowel(word.getCharSequence().charAt(0))));
+
+    }
+
+
+
+
+    //task 13
+    @Test
+    public void sortByLetterOccurrencesDesc() {
+        Task13 taskImpl = new Task13();
+        char character = 'и';
+        List<Word> wordList = taskImpl.sortByLetterOccurrencesDesc(getExampleText(), character);
+        for (int i = 0; i < wordList.size() - 1; i++) {
+            int currElCountOccurrences = StringUtils.countMatches(wordList.get(i).getCharSequence(), character);
+            int nextElCountOccurrences = StringUtils.countMatches(wordList.get(i + 1).getCharSequence(), character);
+            Assert.assertTrue(currElCountOccurrences >= nextElCountOccurrences);
+        }
+
+    }
+
+    //task 14
+    @Test
+    public void getLongestPalindromicSubstring() {
+        Task14 taskImpl = new Task14();
+        String substring = taskImpl.getLongestPalindromicSubstring(getExampleText());
+
+        for (int i = 0; i < substring.length() / 2; i++) {
+            Assert.assertEquals(substring.charAt(i), substring.charAt(substring.length() - 1 - i));
+        }
+
+    }
+
 
     //task 15
     @Test
