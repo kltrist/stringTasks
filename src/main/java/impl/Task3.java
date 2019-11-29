@@ -3,12 +3,17 @@ package impl;
 import model.Sentence;
 import model.Text;
 import model.Word;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class Task3 {
+    final static Logger logger = LoggerFactory.getLogger(Task3.class);
 
     public Word getWordInFirstSentenceWhichNotInOthers(Text text) {
+        logger.info("Task 3 :");
+        logger.info(text.toString());
         List<Sentence> sentences = text.getSentences();
         Sentence firstSentence = sentences.get(0);
         List<Word> wordsOfFirstSentence = firstSentence.getWords();
@@ -20,6 +25,7 @@ public class Task3 {
                 break;
             }
         }
+        logger.info("Result: " + uniqueWord);
         return uniqueWord;
     }
 

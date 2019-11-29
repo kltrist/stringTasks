@@ -3,6 +3,7 @@ package model;
 import util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,12 +25,15 @@ public class Sentence {
         if (word == null)
             throw new IllegalArgumentException("You pass null word!");
 
-        word.setId(words.size() + 1);
+        word.setId(words.size() + 1L);
         words.add(word);
     }
 
-    public  void  removeWord(Word word) {
-        words.remove(word);
+    public void removeWord(Word word) {
+        if (word.getId() == null)
+            throw new IllegalArgumentException("Word ID is undefended!");
+
+        words.removeIf(value -> value.getId().equals(word.getId()));
     }
 
     public void setId(long id) {

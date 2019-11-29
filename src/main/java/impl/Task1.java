@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class Task1 {
 
+
     public List<Sentence> getSentencesWithSameWords(Text text) {
         List<Sentence> sentencesWithSameWords = new ArrayList<>();
 
@@ -20,13 +21,12 @@ public class Task1 {
 
             for (Word word : sentence.getWords()) {
                 Long frequencyCount = wordFrequency.get(word);
-
                 if (wordFrequency.get(word) != null) {
                     isSentenceHaveSameWords = true;
                     break;
-                } else
+                } else {
                     wordFrequency.put(word, 1L);
-
+                }
             }
             if (isSentenceHaveSameWords)
                 sentencesWithSameWords.add(sentence);

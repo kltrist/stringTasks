@@ -22,6 +22,8 @@ import model.Word;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.CustomTokenizer;
 import util.Printer;
 
@@ -30,6 +32,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TaskImplTest {
+
 
 
     private static Text getExampleText() {
@@ -127,10 +130,6 @@ public class TaskImplTest {
         for (int i = 0; i < words.size() - 1; i++) {
             char currentWordFirstLetter = words.get(i).getCharSequence().charAt(0);
             char nextWordFirstLetter = words.get(i + 1).getCharSequence().charAt(0);
-
-            Printer.printWord(words.get(i));
-            if (currentWordFirstLetter != nextWordFirstLetter)
-                System.out.println();
 
             Assert.assertTrue(currentWordFirstLetter <= nextWordFirstLetter);
         }

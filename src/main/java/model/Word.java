@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Word {
 
-    private long id;
+    private Long id;
 
     private String charSequence;
 
@@ -14,12 +14,12 @@ public class Word {
         this.charSequence = charSequence.toLowerCase();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
